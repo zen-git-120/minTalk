@@ -59,3 +59,8 @@ main > section > p {
   flex-wrap: wrap;
   gap: 12px;
 }
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
