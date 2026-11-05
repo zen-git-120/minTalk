@@ -5,6 +5,7 @@ function App() {
   const [name, setName] = useState('')
   const [members, setMembers] = useState([])
   const [error, setError] = useState('')
+  const [currentSpeaker, setCurrentSpeaker] = useState(null)
 
   function handleAddMember() {
     const trimmedName = name.trim()
@@ -19,6 +20,17 @@ function App() {
     setMembers([...members, trimmedName])
     setName('')
     setError('')
+  }
+
+  function handleSelectSpeaker() {
+    if (members.length === 0) {
+      return
+    }
+    if (currentSpeaker !== null) {
+      return
+    }
+    const randomIndex = Math.floor(Math.random() * members.length)
+    setCurrentSpeaker(members[randomIndex])
   }
   
   return (
@@ -38,9 +50,17 @@ function App() {
       </section>
       <section>
         <h2>いま話す人</h2>
-        <p>まずメンバーを追加してください</p>
+        <p>
+          {currentSpeaker ?? (
+            members.length === 0
+            ? 'まずメンバーを追加してください'
+            : 'ランダムに選ぶボタンを押してください'
+          )}
+        </p>
         <div className="speaker-actions">
-          <button type="button">ランダムに選ぶ</button>
+          <button type="button" disabled={members.length === 0 || currentSpeaker !== null} onClick={handleSelectSpeaker}>
+            ランダムに選ぶ
+            </button>
           <button type="button">話し終えた</button>
           <button type="button">最初から</button>
         </div>
