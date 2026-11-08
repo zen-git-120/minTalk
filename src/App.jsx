@@ -48,6 +48,11 @@ function App() {
     setCompletedMembers([...completedMembers, currentSpeaker])
     setCurrentSpeaker(null)
   }
+
+  function handleResetRound() {
+    setCurrentSpeaker(null)
+    setCompletedMembers([])
+  }
   
   return (
     <main>
@@ -82,7 +87,9 @@ function App() {
           <button type="button" disabled={currentSpeaker === null} onClick={handleCompleteTurn}>
             話し終えた
           </button>
-          <button type="button">最初から</button>
+          <button type="button" onClick={handleResetRound}>
+            最初から
+          </button>
         </div>
       </section>
       <section>
